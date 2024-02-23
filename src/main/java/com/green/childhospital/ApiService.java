@@ -48,9 +48,13 @@ public class ApiService {
                                     , false);
         try {
             JsonNode jsonNode = om.readTree(json);
-            List<DataVo> dataList = om.convertValue(jsonNode.at("/TbChildnatnPrvntncltnmdnstM/1/row")
-                    , new TypeReference<List<DataVo>>() {});
+//            List<DataVo> dataList = om.convertValue(jsonNode.at("/TbChildnatnPrvntncltnmdnstM/1/row")
+//                    , new TypeReference<List<DataVo>>() {});
 
+            List<DataVo> dataList = om.convertValue(jsonNode.path("TbChildnatnPrvntncltnmdnstM")
+                            .path(1)
+                            .path("row")
+                    , new TypeReference<List<DataVo>>() {});
             log.info("dataList: {}", dataList);
             return dataList;
         } catch (Exception e) {
